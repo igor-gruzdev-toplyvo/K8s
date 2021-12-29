@@ -6,31 +6,31 @@ spec:
   selector:
     matchLabels:
       app: mongodb
-  template: 
+  template:
     metadata:
       labels:
         app: mongodb
     spec:
       containers:
-      - name: mongodb
-        image: mongo:5
-        # resources:
+        - name: mongodb
+          image: mongo:5
+          # resources:
           # limits:
-            # memory: "3Gi"
-            # cpu: "500m"
-        ports:
-        - containerPort: 27017
-        env:
-          - name: MONGO_INITDB_ROOT_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: mongodb-secrets
-                key: mongo-root-username
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mongodb-secrets
-                key: mongo-root-password
+          # memory: "3Gi"
+          # cpu: "500m"
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: mongo-root-password
 ---
 apiVersion: v1
 kind: Service
@@ -40,6 +40,6 @@ spec:
   selector:
     app: mongodb
   ports:
-  - protocol: TCP
-    port: 27017
-    targetPort: 27017
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
